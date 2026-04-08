@@ -52,9 +52,13 @@ async def start_command(client, message: Message):
         except Exception as e:
             print(f"Referral Error: {e}")
 
-    # 🔥 FINAL FIX: HANDLE FILE ID DIRECTLY
+    # 🔥 FINAL FIX: ROUTE FILE THROUGH GETVIDEO SYSTEM
     if argument:
-        await send_requested_file(client, message, user_id, argument)
+        message.text = "/getvideo"
+        message.command = ["getvideo", argument]
+
+        from plugins.get_video import handle_video_request
+        await handle_video_request(client, message)
         return
 
     # ✅ NEW USER ADD
