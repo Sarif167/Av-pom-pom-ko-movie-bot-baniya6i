@@ -43,7 +43,7 @@ async def handle_video_request(client, m: Message):
     )
 
     buy_button = InlineKeyboardMarkup([
-        [InlineKeyboardButton("• 𝖯𝗎𝗋𝖼𝗁𝖺𝗌𝖾 𝖲𝗎𝖻𝗌𝖼𝗋𝗂𝗉𝗍𝗂𝗈𝗇 •", callback_data="get")]
+        [InlineKeyboardButton("• 𝖯𝗎𝗋𝖼𝗁𝖺𝗌𝖾 𝖲𝗎𝗌𝖼𝗋𝗂𝗉𝗍𝗂𝗈𝗇 •", callback_data="get")]
     ])
 
     # 🔥 ALWAYS VERIFY FREE USERS FIRST
@@ -65,19 +65,36 @@ async def handle_video_request(client, m: Message):
             return await m.reply(limit_reached_msg, reply_markup=buy_button)
 
     # ------------------------------------------------
-    # GET VIDEO
+    # ✅ GET VIDEO (FIXED - SAME VIDEO SEND)
     # ------------------------------------------------
-    video_id = await db.get_unseen_video(user_id)
 
-    if not video_id:
-        try:
-            video_id = await db.get_random_video()
-        except Exception as e:
-            print(f"[Random Video Error] {e}")
-            return
+    file_unique_id = None
 
-    if not video_id:
-        return await m.reply("❌ No videos found in the database.")
+    # agar start se specific video aaya hai
+    if m.command and len(m.command) > 1:
+        file_unique_id = m.command[1]
+
+    if file_unique_id:
+        file_data = await db.videos.find_one({"file_unique_id": file_unique_id})
+
+        if not file_data:
+            return await m.reply("❌ Video not found.")
+
+        video_id = file_data["file_id"]
+
+    else:
+        # fallback (manual button)
+        video_id = await db.get_unseen_video(user_id)
+
+        if not video_id:
+            try:
+                video_id = await db.get_random_video()
+            except Exception as e:
+                print(f"[Random Video Error] {e}")
+                return
+
+        if not video_id:
+            return await m.reply("❌ No videos found in the database.")
 
     # ------------------------------------------------
     # SEND VIDEO
