@@ -60,8 +60,8 @@ async def index_normal_videos(client, m: Message):
         )
 
         btn = InlineKeyboardMarkup([
-            [InlineKeyboardButton("📂 ɢᴇᴛ ᴠɪᴅᴇᴏ 📂", url=shortlink)]
-        ])
+    [InlineKeyboardButton("📂 ɢᴇᴛ ᴠɪᴅᴇᴏ 📂", url=link)]
+])
 
         # -----------------------
         # THUMBNAIL SYSTEM (FIXED)
