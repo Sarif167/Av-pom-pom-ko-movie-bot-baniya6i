@@ -66,7 +66,7 @@ SHORTLINK_API = environ.get("SHORTLINK_API", "74e17137f92e31cc0406fab6fcf3131bc6
 POST_SHORTLINK_URL = environ.get("POST_SHORTLINK_URL", "linkshortify.com")
 POST_SHORTLINK_API = environ.get("POST_SHORTLINK_API", "74e17137f92e31cc0406fab6fcf3131bc61f8ecc")
 VERIFY_EXPIRE = int(environ.get("VERIFY_EXPIRE", "3600"))
-TUTORIAL_LINK = environ.get("TUTORIAL_LINK", "https://t.me/Premium_Jaction/138")
+TUTORIAL_LINK = environ.get("TUTORIAL_LINK", "https://t.me/Premium_Jaction/456")
 
 # =========================================================
 # 💳 PAYMENT SETTINGS
