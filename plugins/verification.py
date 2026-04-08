@@ -19,13 +19,17 @@ logger = logging.getLogger(__name__)
 # --- MAIN VERIFICATION CHECKER ---
 async def av_x_verification(client, message):
     user_id = message.from_user.id
-    
+
+    # ✅ PREMIUM BYPASS (ADDED)
+    if await db.has_premium_access(user_id):
+        return True
+
     # 1. Check if Verification is ON/OFF
     if IS_VERIFY:
         user_verified = await db.is_user_verified(user_id)
     else:
-        user_verified = True 
-    
+        user_verified = True  
+
     # 2. Agar Verified hai to TRUE return karo
     if user_verified:
         return True
@@ -63,6 +67,7 @@ async def av_x_verification(client, message):
     )
     asyncio.create_task(auto_delete_message(message, dlt))
     return False
+
 
 # --- VERIFICATION SUCCESS HANDLER (Run on /start) ---
 async def verify_user_on_start(client, message):
@@ -131,4 +136,3 @@ async def verify_user_on_start(client, message):
     except Exception as e:
         logger.error(f"Verify Error: {e}")
         return False
-        
