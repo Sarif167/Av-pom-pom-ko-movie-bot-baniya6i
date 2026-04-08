@@ -25,10 +25,12 @@ async def start_command(client, message: Message):
         
     argument = message.command[1] if len(message.command) > 1 else None
 
+    # ✅ VERIFICATION LINK
     if argument and argument.startswith('avbotz'):
         await verify_user_on_start(client, message)
         return
 
+    # ✅ TERMS / HELP / ABOUT
     if argument == "terms":
         await send_legal_text(client, message, script.TERMS_TXT)
         return
@@ -42,6 +44,7 @@ async def start_command(client, message: Message):
         await send_about_text(client, message)
         return
 
+    # ✅ REFERRAL
     if argument and argument.startswith("reff_"):
         try:
             await refer_on_start(client, message)
@@ -49,11 +52,12 @@ async def start_command(client, message: Message):
         except Exception as e:
             print(f"Referral Error: {e}")
 
-    if argument and argument.startswith("avx-"):
-        search_id = argument.replace("avx-", "")
-        await send_requested_file(client, message, user_id, search_id)
+    # 🔥 FINAL FIX: HANDLE FILE ID DIRECTLY
+    if argument:
+        await send_requested_file(client, message, user_id, argument)
         return
 
+    # ✅ NEW USER ADD
     if not await db.is_user_exist(user_id):
         await db.add_user(user_id, message.from_user.first_name)
         try:
