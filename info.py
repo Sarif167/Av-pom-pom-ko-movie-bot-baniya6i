@@ -77,7 +77,7 @@ QR_CODE_IMAGE = environ.get("QR_CODE_IMAGE", "https://image.zaw-myo.workers.dev/
 # =========================================================
 # 🖼️ IMAGES
 # =========================================================
-START_PIC = environ.get("START_PIC", "")
+START_PIC = environ.get("START_PIC", "https://image.zaw-myo.workers.dev/image/89652e23-b14f-4aaa-b295-e9f5c93ee3b7")
 AUTH_PICS = environ.get("AUTH_PICS", "")
 VERIFY_IMG = environ.get("VERIFY_IMG", "")
 NO_IMG = environ.get("NO_IMG", "")
