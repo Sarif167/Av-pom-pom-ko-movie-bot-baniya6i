@@ -42,7 +42,7 @@ async def index_normal_videos(client, m: Message):
             me = await client.get_me()
             temp.U_NAME = me.username
 
-        link = f"https://t.me/{temp.U_NAME}?start=avx-{file_unique_id}"
+        link = f"https://t.me/{temp.U_NAME}?start={file_unique_id}"
 
         # Shortlink
         if POST_SHORTLINK:
