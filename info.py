@@ -12,23 +12,23 @@ def str_to_bool(val, default=False):
 # =========================================================
 # 🤖 BOT BASIC INFORMATION
 # =========================================================
-API_ID = int(environ.get("API_ID", "0"))
-API_HASH = environ.get("API_HASH", "")
+API_ID = int(environ.get("API_ID", "23621595"))
+API_HASH = environ.get("API_HASH", "de904be2b4cd4efe2ea728ded17ca77d")
 BOT_TOKEN = environ.get("BOT_TOKEN", "")
 PORT = int(environ.get("PORT", "8080"))
 TIMEZONE = environ.get("TIMEZONE", "Asia/Kolkata")
-OWNER_USERNAME = environ.get("OWNER_USERNAME", "BOT_OWNER26")
+OWNER_USERNAME = environ.get("OWNER_USERNAME", "premiumuseronly_Bot")
 
 # =========================================================
 # 💾 DATABASE CONFIGURATION
 # =========================================================
-DB_URL = environ.get("DATABASE_URI", "")
+DB_URL = environ.get("DATABASE_URI", "mongodb+srv://Tigerbhai:Tigerbhai@cluster07374747.v0ojz7d.mongodb.net/?retryWrites=true&w=majority&appName=Cluster07374747")
 DB_NAME = environ.get("DATABASE_NAME", "testing")
 
 # =========================================================
 # 📢 CHANNELS & ADMINS
 # =========================================================
-ADMINS = int(environ.get("ADMINS", "0"))
+ADMINS = int(environ.get("ADMINS", "1249672673"))
 
 LOG_CHANNEL = int(environ.get("LOG_CHANNEL", "0"))
 PREMIUM_LOGS = int(environ.get("PREMIUM_LOGS", "0"))
