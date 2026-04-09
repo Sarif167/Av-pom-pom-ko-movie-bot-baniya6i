@@ -105,7 +105,7 @@ async def verify_user_on_start(client, message):
         ist = pytz.timezone(TIMEZONE)
         current_time = datetime.now(tz=ist)
 
-        # ✅ Update verification time (IMPORTANT FIX)
+        # ✅ Update verification time
         await db.update_notcopy_user(user_id, {"last_verified": current_time})
         await db.update_verify_id_info(user_id, verify_id, {"verified": True})
 
@@ -135,12 +135,29 @@ async def verify_user_on_start(client, message):
             except Exception as e:
                 logger.warning(f"Failed to send log: {e}")
 
-        await message.reply_photo(
-            photo=VERIFY_IMG,
-            caption=txt.format(message.from_user.mention),
-            reply_markup=btn,
-            parse_mode=enums.ParseMode.HTML
-        )
+        # ✅ FIXED PART (PHOTO + TEXT + FALLBACK)
+        try:
+            if VERIFY_IMG:
+                await message.reply_photo(
+                    photo=VERIFY_IMG,
+                    caption=txt.format(message.from_user.mention),
+                    reply_markup=btn,
+                    parse_mode=enums.ParseMode.HTML
+                )
+            else:
+                await message.reply_text(
+                    text=txt.format(message.from_user.mention),
+                    reply_markup=btn,
+                    parse_mode=enums.ParseMode.HTML
+                )
+        except Exception as e:
+            logger.error(f"Verify Error: {e}")
+            await message.reply_text(
+                text=f"✅ {message.from_user.mention}, verification complete!\n📂 40 files access mil gaya.",
+                reply_markup=btn,
+                parse_mode=enums.ParseMode.HTML
+            )
+
         return True
 
     except Exception as e:
