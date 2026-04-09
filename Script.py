@@ -111,7 +111,7 @@ class script(object):
 
 ⚠️ Screenshot bhejne ke baad 5-10 mins wait kare approval ke liye.."""
 
-    VERIFICATION_TEXT = """⚠️ 𝖠𝖢𝖢𝖤𝖲𝖲 𝖣𝖤𝖭𝖨𝖤𝖣!
+    VERIFICATION_TEXT = """🎉 Access mil gaya!
 
 𝖧𝖾𝗒 {} 👋,
 
@@ -125,11 +125,11 @@ class script(object):
 
 𝖧𝖾𝗒 {} 👋,
 
-✅ 𝖵𝖤𝖱𝖨𝖥𝖨𝖢𝖠𝖳𝖨𝖮𝖭 𝖲𝖴𝖢𝖢𝖤𝖲𝖲𝖥𝖴𝖫!
-𝖸𝗈𝗎 𝖧𝖺𝗏𝖾 𝖴𝗇𝗅𝗈𝖼𝗄𝖾𝖽 𝖯𝗋𝖾𝗆𝗂𝗎𝗆 𝖠𝖼𝖼𝖾𝗌𝗌 𝖥𝗈𝗋 𝖳𝗁𝖾 𝖭𝖾𝗑𝗍 𝖲𝖾𝗌𝗌𝗂𝗈𝗇.
+✅ Verification successful!
+Aapko next session ke liye Premium access mil gaya hai.
 
-📂 𝖸𝗈𝗎 𝖢𝖺𝗇 𝖭𝗈𝗐 𝖣𝗈𝗐𝗇𝗅𝗈𝖺𝖽 & 𝖲𝗍𝗋𝖾𝖺𝗆 𝖥𝗂𝗅𝖾𝗌 𝖶𝗂𝗍𝗁𝗈𝗎𝗍 𝖨𝗇𝗍𝖾𝗋𝗋𝗎𝗉𝗍𝗂𝗈𝗇!
-👇 𝖢𝗅𝗂𝖼𝗄 𝖡𝖾𝗅𝗈𝗐 𝖳𝗈 𝖦𝖾𝗍 𝖸𝗈𝗎𝗋 𝖫𝗂𝗇𝗄."""
+📂 Ab aap bina interruption ke files download aur stream kar sakte ho!
+👇 Niche click karke apna link le lo."""
     
     VERIFIED_TXT = """☄ 𝖴𝖲𝖤𝖱 𝖵𝖤𝖱𝖨𝖥𝖨𝖤𝖣 𝖲𝖴𝖢𝖢𝖤𝖲𝖲𝖥𝖴𝖫𝖫𝖸 ☄
 
