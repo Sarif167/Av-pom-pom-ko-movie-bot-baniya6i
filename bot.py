@@ -7,6 +7,10 @@ import pytz
 from datetime import date, datetime
 from utils import temp 
 
+# ✅ ADDED IMPORT
+from plugins.premium_checker import premium_expiry_checker
+
+
 class Bot(Client):
     def __init__(self):
         super().__init__(
@@ -53,6 +57,9 @@ class Bot(Client):
         self.loop.create_task(check_expired_premium(self))
         self.loop.create_task(start_scheduler(self))
         
+        # ✅ NEW TASK ADDED (PREMIUM EXPIRY MESSAGE)
+        self.loop.create_task(premium_expiry_checker(self))
+        
         # ✅ FIX: Removed 'self' from ping_server()
         self.loop.create_task(ping_server()) 
         
@@ -97,4 +104,3 @@ class Bot(Client):
 
 if __name__ == "__main__":
     Bot().run()
-    
