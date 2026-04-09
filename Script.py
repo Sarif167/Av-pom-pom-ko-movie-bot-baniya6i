@@ -103,12 +103,13 @@ class script(object):
 ✅ 𝖠𝖼𝖼𝖾𝗌𝗌 𝗍𝗈 𝖯𝗋𝖾𝗆𝗂𝗎𝗆 𝖢𝗈𝗇𝗍𝖾𝗇𝗍
 ✅ 𝖧𝗂𝗀𝗁 𝖲𝗉𝖾𝖾𝖽
 
-💳 𝖧𝗈𝗐 𝗍𝗈 𝖯𝖺𝗒?
-1️⃣ 𝖲𝖼𝖺𝗇 𝗍𝗁𝖾 𝖰𝖱 𝖢𝗈𝖽𝖾 𝖺𝖻𝗈𝗏𝖾 𝗈𝗋 𝗎𝗌𝖾 𝖴𝖯𝖨 𝖨𝖣: <code>{2}</code>
-2️⃣ 𝖳𝖺𝗄𝖾 𝖺 𝖲𝖼𝗋𝖾𝖾𝗇𝗌𝗁𝗈𝗍 𝗈𝖿 𝗌𝗎𝖼𝖼𝖾𝗌𝗌𝖿𝗎𝗅 𝗉𝖺𝗒𝗆𝖾𝗇𝗍.
-3️⃣ 𝖲𝖾𝗇𝖽 𝗍𝗁𝖾 𝖲𝖼𝗋𝖾𝖾𝗇𝗌𝗁𝗈𝗍 𝖧𝖤𝖱𝖤 𝗐𝗂𝗍𝗁 𝗍𝗁𝖾 𝖼𝖺𝗉𝗍𝗂𝗈𝗇 "𝖻𝗎𝗒".
+💳 Payment kaise kare?
 
-⚠️ 𝖶𝖺𝗂𝗍 𝖿𝗈𝗋 5-10 𝗆𝗂𝗇𝗌 𝖺𝖿𝗍𝖾𝗋 𝗌𝖾𝗇𝖽𝗂𝗇𝗀 𝗌𝖼𝗋𝖾𝖾𝗇𝗌𝗁𝗈𝗍 𝖿𝗈𝗋 𝖺𝗉𝗉𝗋𝗈𝗏𝖺𝗅."""
+1️⃣ Scan the QR Code above ya UPI ID use kare: <code>{2}</code>
+2️⃣ Successful payment ka screenshot le.
+3️⃣ Screenshot yaha send kare caption ke saath "/buy".
+
+⚠️ Screenshot bhejne ke baad 5-10 mins wait kare approval ke liye.."""
 
     VERIFICATION_TEXT = """⚠️ 𝖠𝖢𝖢𝖤𝖲𝖲 𝖣𝖤𝖭𝖨𝖤𝖣!
 
