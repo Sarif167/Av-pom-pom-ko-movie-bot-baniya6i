@@ -59,9 +59,13 @@ async def av_x_verification(client, message):
     verify_url = await get_shortlink_av(long_url)
 
     buttons = [[
-        InlineKeyboardButton(text="⚠️ ᴠᴇʀɪғʏ ⚠️", url=verify_url),
-        InlineKeyboardButton(text="❗ ʜᴏᴡ ᴛᴏ ᴠᴇʀɪғʏ ❗", url=TUTORIAL_LINK)
-    ]]
+    InlineKeyboardButton(text="⚠️ ᴠᴇʀɪғʏ ⚠️", url=verify_url),
+    InlineKeyboardButton(text="❗ ʜᴏᴡ ᴛᴏ ᴠᴇʀɪғʏ ❗", url=TUTORIAL_LINK)
+],
+[
+    InlineKeyboardButton(text="💎 ᴘʀᴇᴍɪᴜᴍ 💎", url=PREMIUM_LINK),
+    InlineKeyboardButton(text="📞 ᴄᴏɴᴛᴀᴄᴛ ᴀᴅᴍɪɴ 📞", url=f"https://t.me/{ADMIN_USERNAME}")
+]]
 
     user_name = message.from_user.first_name
 
