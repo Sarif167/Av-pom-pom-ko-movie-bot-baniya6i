@@ -1,15 +1,11 @@
-import os
+import os  # ✅ FIX: 'I' ko small kar diya
 from pyrogram import Client
 from info import API_ID, API_HASH, BOT_TOKEN, LOG_CHANNEL, PORT, ADMINS
 from aiohttp import web
-from route import web_server, ping_server, check_expired_premium, start_scheduler 
+from route import web_server, check_expired_premium, start_scheduler 
 import pytz
 from datetime import date, datetime
 from utils import temp 
-
-# ✅ ADDED IMPORT
-from plugins.premium_checker import premium_expiry_checker
-
 
 class Bot(Client):
     def __init__(self):
@@ -53,25 +49,21 @@ class Bot(Client):
         now = datetime.now(tz)
         time = now.strftime("%H:%M:%S %p")
         
-        # --- BACKGROUND TASKS ---
+        # Background Tasks
         self.loop.create_task(check_expired_premium(self))
         self.loop.create_task(start_scheduler(self))
         
-        # ✅ NEW TASK ADDED (PREMIUM EXPIRY MESSAGE)
-        self.loop.create_task(premium_expiry_checker(self))
+        # 👇 MAIN FIX: Yahan 'self' pass karna zaroori tha 👇
+        app_instance = await web_server(self)
         
-        # ✅ FIX: Removed 'self' from ping_server()
-        self.loop.create_task(ping_server()) 
-        
-        app_instance = await web_server()
         app_runner = web.AppRunner(app_instance)
         await app_runner.setup()
         site = web.TCPSite(app_runner, "0.0.0.0", int(PORT))
         await site.start()
 
         print(f"{me.first_name} 𝚂𝚃𝙰𝚁𝚃𝙴𝙳 ⚡️⚡️⚡️")
-  
-        # ✅ ADMINS MESSAGE
+
+        # ✅ ADMINS को मैसेज भेजना
         if isinstance(ADMINS, list):
             for admin in ADMINS:
                 try:
@@ -83,8 +75,7 @@ class Bot(Client):
                 await self.send_message(ADMINS, f"**__{me.first_name} Iꜱ Sᴛᴀʀᴛᴇᴅ.....✨️😅😅😅__**")
             except:
                 pass
-        
-        # ✅ LOG CHANNEL MESSAGE
+                
         try:
             await self.send_message(
                 LOG_CHANNEL,
@@ -104,3 +95,4 @@ class Bot(Client):
 
 if __name__ == "__main__":
     Bot().run()
+
