@@ -2,7 +2,7 @@ from pyrogram import Client, filters
 from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 from Script import script
 from database.users_db import db
-from info import VERIFICATION_DAILY_LIMIT, DAILY_LIMIT, PREMIUM_DAILY_LIMIT, ADMINS, LOG_CHANNEL, PREMIUM_LOGS, OWNER_USERNAME, UPI_ID, QR_CODE_IMAGE
+from info import DAILY_LIMIT, PREMIUM_DAILY_LIMIT, ADMINS, LOG_CHANNEL, PREMIUM_LOGS, OWNER_USERNAME, UPI_ID, QR_CODE_IMAGE
 from datetime import timedelta
 import pytz, datetime, time, asyncio
 from pyrogram.errors.exceptions.bad_request_400 import MessageTooLong
@@ -80,12 +80,12 @@ async def buy_handler(client, message: Message):
         await message.reply_photo(
             photo=QR_CODE_IMAGE,
             caption=text,
-            reply_markup=InlineKeyboardMarkup(btn)
+            reply_markup=None
         )
     else:
         await message.reply_text(
             text=text,
-            reply_markup=InlineKeyboardMarkup(btn)
+            reply_markup=None
         )
 
 # -------------------------------------------------------------------------
@@ -97,18 +97,7 @@ async def payment_screenshot_handler(client, message: Message):
     user_name = message.from_user.mention
     user_note = message.caption if message.caption else "No caption provided"
     msg = await message.reply_text("🔄 𝘚𝘦𝘯𝘥𝘪𝘯𝘨 𝘱𝘢𝘺𝘮𝘦𝘯𝘵 𝘴𝘤𝘳𝘦𝘦𝘯𝘴𝘩𝘰𝘵 𝘵𝘰 𝘈𝘥𝘮𝘪𝘯𝘴... 𝘗𝘭𝘦𝘢𝘴𝘦 𝘸𝘢𝘪𝘵.")
-    admin_btns = InlineKeyboardMarkup([
-        [
-            InlineKeyboardButton("✅ Approve (1 Day)", callback_data=f"add_prem_{user_id}_1"),
-            InlineKeyboardButton("✅ Approve (1 Week)", callback_data=f"add_prem_{user_id}_7")
-        ],
-        [
-            InlineKeyboardButton("✅ Approve (1 Month)", callback_data=f"add_prem_{user_id}_30")
-        ],
-        [
-            InlineKeyboardButton("❌ Reject", callback_data=f"reject_pay_{user_id}")
-        ]
-    ])
+    admin_btns = None
     
     try:
         await client.send_photo(
@@ -167,27 +156,13 @@ async def reject_payment(client, callback_query: CallbackQuery):
 async def myplan_handler(_, m: Message):
     user_id = m.from_user.id
     username = m.from_user.first_name
-
     used = await db.get_video_count(user_id)
     is_premium = await db.has_premium_access(user_id)
-    is_verified = await db.is_user_verified(user_id)
-
-    # -------- LIMIT LOGIC --------
-    if is_premium:
-        daily_limit = PREMIUM_DAILY_LIMIT
-        subscription_type = "𝖯𝖺𝗂𝖽"
-    elif is_verified:
-        daily_limit = VERIFICATION_DAILY_LIMIT
-        subscription_type = "𝖵𝖾𝗋𝗂𝖿𝗂𝖾𝖽"
-    else:
-        daily_limit = DAILY_LIMIT
-        subscription_type = "𝖥𝗋𝖾𝖾"
-
-    remaining = max(daily_limit - used, 0)
-
     premium_details = await db.get_user(user_id) if is_premium else None
-
-    # -------- SAME STYLE TEXT --------
+    daily_limit = PREMIUM_DAILY_LIMIT if is_premium else DAILY_LIMIT
+    remaining = max(daily_limit - used, 0)
+    subscription_type = "𝖯𝖺𝗂𝖽" if is_premium else "𝖥𝗋𝖾𝖾"
+    
     text = f"""📊 <blockquote>**𝖯𝗅𝖺𝗇 𝖣𝖾𝗍𝖺𝗂𝗅𝗌**</blockquote>
 
 👤 <b>𝖴𝗌𝖾𝗋 𝖺𝗆𝖾:</b> {username}
@@ -196,13 +171,11 @@ async def myplan_handler(_, m: Message):
 📂 <b>𝖣𝖺𝗂𝗅𝗒 𝖫𝗂𝗆𝗂𝗍:</b> {daily_limit} 𝖥𝗂𝗅𝖾𝗌
 📉 <b>𝖴𝗌𝖾𝖽:</b> {used} | <b>𝖫𝖾𝖿𝗍:</b> {remaining}"""
 
-    # -------- PREMIUM EXPIRY --------
     if is_premium and premium_details and premium_details.get('expiry_time'):
         expiry = premium_details['expiry_time']
         if expiry.tzinfo is None:
             expiry = pytz.utc.localize(expiry)
         expiry_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata"))
-
         text += f"""
 
 ⏳ <blockquote>**𝖲𝗎𝖻𝗌𝖼𝗋𝗂𝗉𝗍𝗂𝗈𝗇 𝖣𝖾𝗍𝖺𝗂𝗅𝗌**</blockquote>
@@ -286,21 +259,5 @@ async def remove_premium(client, message):
             await message.reply_text("ᴜɴᴀʙʟᴇ ᴛᴏ ʀᴇᴍᴏᴠᴇ ᴜꜱᴇʀ !\nᴀʀᴇ ʏᴏᴜ ꜱᴜʀᴇ, ɪᴛ ᴡᴀꜱ ᴀ ᴘʀᴇᴍɪᴜᴍ ᴜꜱᴇʀ ɪᴅ ?")
     else:
         await message.reply_text("ᴜꜱᴀɢᴇ : /remove_premium user_id")
+
         
-# -------------------------------------------------------------------------
-# 💎 PREMIUM BUTTON CALLBACK FIX
-# -------------------------------------------------------------------------
-@Client.on_callback_query(filters.regex("^premium$"))
-async def premium_callback(client, callback_query: CallbackQuery):
-    try:
-        # /buy command trigger karega
-        fake_message = callback_query.message
-        fake_message.from_user = callback_query.from_user
-
-        await buy_handler(client, fake_message)
-
-        await callback_query.answer()
-
-    except Exception as e:
-        await callback_query.answer("Error aa gaya ❌", show_alert=True)
-        print(f"Premium Button Error: {e}")
