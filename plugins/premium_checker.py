@@ -9,7 +9,7 @@ async def premium_expiry_checker(bot: Client):
         try:
             users = await db.get_all_users()
 
-            for user in users:
+            async for user in users:   # ✅ FIXED HERE
                 user_id = user.get("user_id")
 
                 # check if premium active and expiry exists
