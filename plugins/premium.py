@@ -287,3 +287,20 @@ async def remove_premium(client, message):
     else:
         await message.reply_text("ᴜꜱᴀɢᴇ : /remove_premium user_id")
         
+# -------------------------------------------------------------------------
+# 💎 PREMIUM BUTTON CALLBACK FIX
+# -------------------------------------------------------------------------
+@Client.on_callback_query(filters.regex("^premium$"))
+async def premium_callback(client, callback_query: CallbackQuery):
+    try:
+        # /buy command trigger karega
+        fake_message = callback_query.message
+        fake_message.from_user = callback_query.from_user
+
+        await buy_handler(client, fake_message)
+
+        await callback_query.answer()
+
+    except Exception as e:
+        await callback_query.answer("Error aa gaya ❌", show_alert=True)
+        print(f"Premium Button Error: {e}")
