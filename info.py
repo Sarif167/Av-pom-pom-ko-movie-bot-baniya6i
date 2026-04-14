@@ -46,7 +46,7 @@ AUTH_CHANNEL = [int(x) for x in auth_channel_str.split() if x.strip().lstrip("-"
 # ⚙️ FEATURES & TOGGLES  (FIXED)
 # =========================================================
 FSUB = str_to_bool(environ.get("FSUB"), True)
-IS_VERIFY = str_to_bool(environ.get("IS_VERIFY"), True)
+IS_VERIFY = str_to_bool(environ.get("IS_VERIFY"), False)
 POST_SHORTLINK = str_to_bool(environ.get("POST_SHORTLINK"), True)
 SEND_POST = str_to_bool(environ.get("SEND_POST"), True)
 PROTECT_CONTENT = str_to_bool(environ.get("PROTECT_CONTENT"), False)
