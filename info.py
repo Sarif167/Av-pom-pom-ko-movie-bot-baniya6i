@@ -35,11 +35,11 @@ PREMIUM_LOGS = int(environ.get("PREMIUM_LOGS", "-1003184409377"))
 VERIFIED_LOG = int(environ.get("VERIFIED_LOG", "-1003184409377"))
 
 POST_CHANNEL = int(environ.get("POST_CHANNEL", "-1002314687215"))
-VIDEO_CHANNEL = int(environ.get("VIDEO_CHANNEL", "-1002623534183"))
-BRAZZER_CHANNEL = int(environ.get("BRAZZER_CHANNEL", "-1002259803190"))
+VIDEO_CHANNEL = int(environ.get("VIDEO_CHANNEL", "-1002489440726"))
+BRAZZER_CHANNEL = int(environ.get("BRAZZER_CHANNEL", "-1002904920278"))
 
 # Auth channels list
-auth_channel_str = environ.get("AUTH_CHANNEL", "-1002682431363")
+auth_channel_str = environ.get("AUTH_CHANNEL", "-1002641663814")
 AUTH_CHANNEL = [int(x) for x in auth_channel_str.split() if x.strip().lstrip("-").isdigit()]
 
 # =========================================================
