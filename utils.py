@@ -1,13 +1,13 @@
 import asyncio
 import time
 import math
+import os
 import logging
 import aiohttp
 from shortzy import Shortzy  # Ensure pip install shortzy
-import os, uuid, subprocess
-import random, string
+
 # --- FIX: Added AUTH_CHANNEL, AUTH_PICS to imports ---
-from info import SHORTLINK_API, SHORTLINK_URL, POST_SHORTLINK_API, POST_SHORTLINK_URL, AUTH_CHANNEL, AUTH_PICS
+from info import SHORTLINK_API, SHORTLINK_URL, AUTH_CHANNEL, AUTH_PICS
 from database.users_db import db
 from pyrogram.enums import ParseMode
 from Script import script
@@ -100,13 +100,13 @@ async def is_user_joined(bot, message: Message) -> bool:
                 await message.reply_photo(
                     photo=AUTH_PICS,
                     caption=script.AUTH_TXT.format(message.from_user.mention),
-                    reply_markup=InlineKeyboardMarkup(buttons),
+                    reply_markup=None
                     parse_mode=ParseMode.HTML
                 )
             else:
                 await message.reply_text(
                     text=script.AUTH_TXT.format(message.from_user.mention),
-                    reply_markup=InlineKeyboardMarkup(buttons),
+                    reply_markup=None
                     parse_mode=ParseMode.HTML
                 )
         except Exception as e:
@@ -115,23 +115,6 @@ async def is_user_joined(bot, message: Message) -> bool:
         return False
 
     return True
-
-async def generate_thumbnail(video_path):
-    thumb_path = f"/tmp/thumb_{uuid.uuid4().hex}.jpg"
-
-    cmd = [
-        "ffmpeg", "-i", video_path,
-        "-ss", "00:00:01",
-        "-vframes", "1",
-        thumb_path
-    ]
-
-    subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    return thumb_path if os.path.exists(thumb_path) else None
-
-def generate_weird_name(length=8):
-    chars = string.ascii_letters + string.digits + "@$#%&()-_"
-    return "".join(random.choice(chars) for _ in range(length))
     
 # =================================================
 # ⏰ TIME FORMATTER (Seconds -> Readable)
@@ -245,8 +228,8 @@ async def users_broadcast(user_id, message, is_pin):
         
 # -------------------------- SHORT LINK GENERATOR (Manual) -------------------------- #
 async def get_shortlink(link):
-    API = POST_SHORTLINK_API
-    URL_DOMAIN = POST_SHORTLINK_URL
+    API = SHORTLINK_API
+    URL_DOMAIN = SHORTLINK_URL
     
     if not link.startswith("https"):
         link = link.replace("http", "https", 1)
@@ -301,4 +284,5 @@ async def auto_delete_message(message, dlt_msg):
         await message.delete()
     except Exception:
         pass
-        
+
+    
