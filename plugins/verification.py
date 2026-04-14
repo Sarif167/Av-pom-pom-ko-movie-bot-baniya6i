@@ -63,7 +63,7 @@ async def av_x_verification(client, message):
     InlineKeyboardButton(text="❗ ʜᴏᴡ ᴛᴏ ᴠᴇʀɪғʏ ❗", url=TUTORIAL_LINK)
 ],
 [
-    InlineKeyboardButton(text="💎 ᴘʀᴇᴍɪᴜᴍ 💎", url=PREMIUM_LINK),
+    InlineKeyboardButton(text="💎 ᴘʀᴇᴍɪᴜᴍ 💎", callback_data="premium"),
     InlineKeyboardButton(text="📞 ᴄᴏɴᴛᴀᴄᴛ ᴀᴅᴍɪɴ 📞", url=f"https://t.me/{ADMIN_USERNAME}")
 ]]
 
