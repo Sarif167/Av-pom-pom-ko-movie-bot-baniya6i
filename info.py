@@ -23,7 +23,7 @@ OWNER_USERNAME = environ.get("OWNER_USERNAME", "premiumuseronly_Bot")
 # 💾 DATABASE CONFIGURATION
 # =========================================================
 DB_URL = environ.get("DATABASE_URI", "mongodb+srv://Tigerbhai:Tigerbhai@cluster07374747.v0ojz7d.mongodb.net/?retryWrites=true&w=majority&appName=Cluster07374747")
-DB_NAME = environ.get("DATABASE_NAME", "testing")
+DB_NAME = environ.get("DATABASE_NAME", "testingg")
 
 # =========================================================
 # 📢 CHANNELS & ADMINS
@@ -34,7 +34,7 @@ LOG_CHANNEL = int(environ.get("LOG_CHANNEL", "-1003184409377"))
 PREMIUM_LOGS = int(environ.get("PREMIUM_LOGS", "-1003184409377"))
 VERIFIED_LOG = int(environ.get("VERIFIED_LOG", "-1003184409377"))
 
-POST_CHANNEL = int(environ.get("POST_CHANNEL", "-1002314687215"))
+POST_CHANNEL = int(environ.get("POST_CHANNEL", "-1002521513688"))
 VIDEO_CHANNEL = int(environ.get("VIDEO_CHANNEL", "-1002489440726"))
 BRAZZER_CHANNEL = int(environ.get("BRAZZER_CHANNEL", "-1002904920278"))
 
