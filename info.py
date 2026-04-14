@@ -86,3 +86,9 @@ NO_IMG = environ.get("NO_IMG", "https://image.zaw-myo.workers.dev/image/89652e23
 # 🌐 WEB APP
 # =========================================================
 WEB_APP_URL = environ.get("WEB_APP_URL", "https://okay-biddy-nasir135-c4c04239.koyeb.app/")
+
+# =========================================================
+# 👑 EXTRA BUTTON SETTINGS (ADDED)
+# =========================================================
+ADMIN_USERNAME = environ.get("ADMIN_USERNAME", "premiumuseronly_Bot")   # without @
+PREMIUM_LINK = environ.get("PREMIUM_LINK", "https://t.me/yourchannel_or_bot")
